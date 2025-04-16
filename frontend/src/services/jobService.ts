@@ -1,147 +1,213 @@
-interface JobPosting {
-  id: string;
-  title: string;
-  company: string;
-  location: string;
-  description: string;
-  requirements: string[];
-  skills: string[];
-  salary?: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
+import { JobPosting } from "@/types/job";
 
-// Mock data for job postings
+// Mock job data
 const mockJobs: JobPosting[] = [
   {
-    id: '1',
-    title: 'Senior Frontend Developer',
-    company: 'TechCorp',
-    location: 'San Francisco, CA (Remote)',
-    description: 'We are seeking a Senior Frontend Developer with expertise in React to join our growing team...',
+    id: "job-1",
+    title: "Frontend Developer",
+    company: "TechCorp Inc.",
+    location: "San Francisco, CA",
+    remote: true,
+    salary: "$90,000 - $120,000",
+    description: "We are looking for a skilled Frontend Developer to join our team. The ideal candidate will have experience with React, Next.js, and TypeScript.",
+    experienceLevel: "Mid-Level",
+    employmentType: "Full-time",
+    skills: ["React", "TypeScript", "HTML/CSS", "Next.js", "Redux"],
+    datePosted: "2023-10-15",
     requirements: [
-      'Bachelor\'s degree in Computer Science or related field',
-      '5+ years of experience in frontend development',
-      'Strong proficiency in React and TypeScript'
+      "3+ years of experience with React",
+      "Strong knowledge of TypeScript",
+      "Experience with state management (Redux, Context API)",
+      "Bachelor's degree in Computer Science or related field"
     ],
-    skills: ['React', 'TypeScript', 'Redux', 'NextJS', 'Tailwind CSS'],
-    salary: '$120,000 - $150,000',
-    createdAt: new Date('2023-11-01'),
-    updatedAt: new Date('2023-11-01')
+    benefits: [
+      "Flexible working hours",
+      "Remote work options",
+      "Health insurance",
+      "401(k) matching",
+      "Professional development budget"
+    ],
+    applicationUrl: "https://techcorp.com/careers/frontend-developer"
   },
   {
-    id: '2',
-    title: 'UX Designer',
-    company: 'DesignHub',
-    location: 'New York, NY',
-    description: 'DesignHub is looking for a talented UX Designer to create intuitive and engaging user experiences...',
+    id: "job-2",
+    title: "UX/UI Designer",
+    company: "Creative Solutions",
+    location: "New York, NY",
+    remote: false,
+    salary: "$80,000 - $110,000",
+    description: "Creative Solutions is seeking a talented UX/UI Designer to create beautiful, intuitive user experiences for our clients. You will work closely with our development team to transform concepts into user-friendly interfaces.",
+    experienceLevel: "Senior",
+    employmentType: "Full-time",
+    skills: ["Figma", "Adobe XD", "Sketch", "User Research", "Prototyping"],
+    datePosted: "2023-10-10",
     requirements: [
-      'Bachelor\'s degree in Design or related field',
-      '3+ years of experience in UX design',
-      'Portfolio showcasing design projects'
+      "5+ years of experience in UX/UI design",
+      "Portfolio demonstrating strong design skills",
+      "Experience with user research and testing",
+      "Excellent communication skills"
     ],
-    skills: ['Figma', 'User Research', 'Wireframing', 'Prototyping', 'Design Systems'],
-    salary: '$90,000 - $120,000',
-    createdAt: new Date('2023-10-25'),
-    updatedAt: new Date('2023-10-25')
+    benefits: [
+      "Creative work environment",
+      "Health and dental insurance",
+      "Paid time off",
+      "Design conference stipend"
+    ]
   },
   {
-    id: '3',
-    title: 'Full Stack Developer',
-    company: 'StartupVision',
-    location: 'Remote',
-    description: 'StartupVision is seeking a Full Stack Developer to help build our innovative platform...',
+    id: "job-3",
+    title: "Data Scientist",
+    company: "Insight Analytics",
+    location: "Boston, MA",
+    remote: true,
+    salary: "$120,000 - $150,000",
+    description: "Join our data science team to develop machine learning models and analyze complex datasets. You will help drive business decisions through data insights and build predictive models.",
+    experienceLevel: "Senior",
+    employmentType: "Full-time",
+    skills: ["Python", "Machine Learning", "SQL", "Data Visualization", "Statistical Analysis"],
+    datePosted: "2023-10-05",
     requirements: [
-      'Strong knowledge of frontend and backend technologies',
-      '2+ years of experience in full stack development',
-      'Experience with cloud services (AWS, GCP, or Azure)'
+      "Master's or PhD in Computer Science, Statistics, or related field",
+      "Experience with machine learning frameworks (TensorFlow, PyTorch)",
+      "Strong SQL skills",
+      "Experience with data visualization tools"
     ],
-    skills: ['JavaScript', 'Node.js', 'React', 'PostgreSQL', 'Docker'],
-    createdAt: new Date('2023-11-05'),
-    updatedAt: new Date('2023-11-05')
+    benefits: [
+      "Flexible schedule",
+      "Remote work option",
+      "Comprehensive benefits package",
+      "Continuing education support"
+    ]
+  },
+  {
+    id: "job-4",
+    title: "Backend Developer",
+    company: "ServerStack",
+    location: "Seattle, WA",
+    remote: true,
+    salary: "$95,000 - $130,000",
+    description: "ServerStack is looking for a Backend Developer to build robust and scalable server-side applications. You will be responsible for implementing API endpoints, optimizing database queries, and ensuring high performance.",
+    experienceLevel: "Mid-Level",
+    employmentType: "Full-time",
+    skills: ["Node.js", "Express", "MongoDB", "RESTful APIs", "GraphQL"],
+    datePosted: "2023-10-12",
+    requirements: [
+      "3+ years of experience with Node.js",
+      "Experience with NoSQL databases",
+      "Knowledge of API design principles",
+      "Understanding of server security concepts"
+    ],
+    benefits: [
+      "Competitive salary",
+      "Health and wellness benefits",
+      "Flexible work environment",
+      "Professional development opportunities"
+    ]
+  },
+  {
+    id: "job-5",
+    title: "Full Stack Developer",
+    company: "Innovate Solutions",
+    location: "Austin, TX",
+    remote: false,
+    salary: "$100,000 - $140,000",
+    description: "We're seeking a Full Stack Developer who can work on both frontend and backend technologies. You'll be involved in all stages of development, from concept to deployment.",
+    experienceLevel: "Senior",
+    employmentType: "Full-time",
+    skills: ["JavaScript", "React", "Node.js", "SQL", "AWS", "Docker"],
+    datePosted: "2023-10-08",
+    requirements: [
+      "5+ years of full stack development experience",
+      "Strong JavaScript skills",
+      "Experience with cloud services (AWS, Azure, GCP)",
+      "Knowledge of CI/CD pipelines"
+    ],
+    benefits: [
+      "Competitive compensation package",
+      "Health and retirement benefits",
+      "Flexible work hours",
+      "Modern office environment"
+    ]
   }
 ];
 
-// Service for job operations
-const jobService = {
-  // Get all job postings
-  getAllJobs: async (): Promise<JobPosting[]> => {
+class JobService {
+  // Get all jobs
+  async getAllJobs(): Promise<JobPosting[]> {
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 800));
-    return mockJobs;
-  },
-
-  // Get a specific job by ID
-  getJobById: async (id: string): Promise<JobPosting | null> => {
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 500));
-    const job = mockJobs.find(j => j.id === id);
-    return job || null;
-  },
-
-  // Search for jobs by query
-  searchJobs: async (query: string): Promise<JobPosting[]> => {
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 700));
-    
-    if (!query) return mockJobs;
-    
-    query = query.toLowerCase();
-    return mockJobs.filter(job => 
-      job.title.toLowerCase().includes(query) || 
-      job.company.toLowerCase().includes(query) ||
-      job.skills.some(skill => skill.toLowerCase().includes(query))
-    );
-  },
-
-  // Create a new job posting (for employers)
-  createJob: async (jobData: Omit<JobPosting, 'id' | 'createdAt' | 'updatedAt'>): Promise<JobPosting> => {
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    const newJob: JobPosting = {
-      ...jobData,
-      id: Math.random().toString(36).substring(2, 9),
-      createdAt: new Date(),
-      updatedAt: new Date()
-    };
-    
-    return newJob;
-  },
-
-  // Match a resume against job requirements
-  matchResumeToJob: async (resumeId: string, jobId: string): Promise<{
-    overallScore: number;
-    skillsMatch: { skill: string; matched: boolean }[];
-    recommendedSkills: string[];
-  }> => {
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    const job = mockJobs.find(j => j.id === jobId);
-    if (!job) {
-      throw new Error('Job not found');
-    }
-    
-    // Generate fake match data
-    const overallScore = Math.floor(Math.random() * 30) + 65;
-    
-    const skillsMatch = job.skills.map(skill => ({
-      skill,
-      matched: Math.random() > 0.3 // 70% chance of matching
-    }));
-    
-    const recommendedSkills = job.skills
-      .filter(() => Math.random() > 0.7) // Randomly select some skills as recommended
-      .filter((_, index) => !skillsMatch[index].matched); // Only recommend skills that didn't match
-    
-    return {
-      overallScore,
-      skillsMatch,
-      recommendedSkills
-    };
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(mockJobs);
+      }, 800);
+    });
   }
-};
 
-export default jobService;
-export type { JobPosting }; 
+  // Get job by ID
+  async getJobById(id: string): Promise<JobPosting | null> {
+    // Simulate API call
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const job = mockJobs.find(job => job.id === id);
+        resolve(job || null);
+      }, 500);
+    });
+  }
+
+  // Search jobs by query (title, company, description)
+  async searchJobs(query: string): Promise<JobPosting[]> {
+    // Simulate API call
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        if (!query.trim()) {
+          resolve(mockJobs);
+          return;
+        }
+        
+        const lowerQuery = query.toLowerCase();
+        const filtered = mockJobs.filter(job => 
+          job.title.toLowerCase().includes(lowerQuery) ||
+          job.company.toLowerCase().includes(lowerQuery) ||
+          job.description.toLowerCase().includes(lowerQuery) ||
+          job.skills.some((skill: string) => skill.toLowerCase().includes(lowerQuery))
+        );
+        
+        resolve(filtered);
+      }, 600);
+    });
+  }
+
+  // Match resume to job
+  async matchResumeToJob(jobId: string, resumeId: string): Promise<{
+    score: number;
+    matchedSkills: string[];
+    missingSkills: string[];
+    feedback: string;
+  }> {
+    // Simulate API call
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const job = mockJobs.find(job => job.id === jobId);
+        
+        if (!job) {
+          throw new Error("Job not found");
+        }
+        
+        // Mock match result - in a real app this would analyze the resume against the job
+        const matchedSkills = job.skills.filter((_, index) => index % 2 === 0);
+        const missingSkills = job.skills.filter((_, index) => index % 2 !== 0);
+        const score = Math.floor(70 + Math.random() * 30);
+        
+        resolve({
+          score,
+          matchedSkills,
+          missingSkills,
+          feedback: score > 80 
+            ? "Your resume is a strong match for this position. Consider highlighting your experience with " + matchedSkills.join(", ") + "."
+            : "Your resume partially matches this job. Consider adding more details about your experience with " + missingSkills.join(", ") + "."
+        });
+      }, 1200);
+    });
+  }
+}
+
+export const jobService = new JobService(); 

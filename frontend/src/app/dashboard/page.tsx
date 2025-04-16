@@ -14,7 +14,8 @@ import {
   ChevronRight,
   Calendar,
   Clock,
-  Trash2
+  Trash2,
+  Briefcase
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -78,7 +79,7 @@ export default function Dashboard() {
       </motion.div>
 
       {/* Quick Actions */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -155,6 +156,33 @@ export default function Dashboard() {
               className="inline-flex items-center text-sm font-medium text-white hover:text-green-100"
             >
               Start Analysis
+              <ChevronRight className="ml-1 h-4 w-4" />
+            </Link>
+          </div>
+        </motion.div>
+        
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
+          className="bg-gradient-to-r from-orange-600 to-yellow-600 text-white rounded-lg p-6 shadow-md"
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-xl font-semibold mb-2">Job Matches</h2>
+              <p className="text-orange-100">Find jobs matching your resume</p>
+            </div>
+            <div className="bg-white bg-opacity-20 p-3 rounded-full">
+              <Briefcase className="h-6 w-6" />
+            </div>
+          </div>
+          <div className="mt-4">
+            <Link 
+              href="/job-matches"
+              className="inline-flex items-center text-sm font-medium text-white hover:text-orange-100"
+            >
+              View Matches
               <ChevronRight className="ml-1 h-4 w-4" />
             </Link>
           </div>

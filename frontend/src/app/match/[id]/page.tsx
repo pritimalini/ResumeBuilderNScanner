@@ -15,7 +15,8 @@ import {
   GraduationCap
 } from 'lucide-react';
 import Link from 'next/link';
-import jobService, { JobPosting } from '@/services/jobService';
+import { jobService } from '@/services/jobService';
+import { JobPosting } from '@/types/job';
 
 interface MatchResult {
   score: number;

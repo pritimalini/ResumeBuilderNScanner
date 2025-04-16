@@ -58,6 +58,7 @@ const Navbar = () => {
   const privateNavLinks = [
     { name: 'Dashboard', href: '/dashboard' },
     { name: 'Jobs', href: '/jobs' },
+    { name: 'Job Matches', href: '/job-matches' },
     { name: 'Resume Builder', href: '/resume-builder' },
     { name: 'Resume Analysis', href: '/score' },
     { name: 'Saved Jobs', href: '/saved-jobs' },

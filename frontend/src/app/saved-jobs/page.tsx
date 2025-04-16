@@ -15,13 +15,27 @@ import {
   Trash2,
 } from 'lucide-react';
 import Link from 'next/link';
-import jobService, { JobPosting } from '@/services/jobService';
+import { jobService } from '@/services/jobService';
+import { JobPosting } from '@/types/job';
 
-// Extend JobPosting to include bookmarked date and notes
-interface SavedJob extends JobPosting {
+// Define the SavedJob interface
+interface SavedJob {
+  id: string;
+  title: string;
+  company: string;
+  location: string;
+  description: string;
+  requirements?: string[];
+  skills: string[];
+  salary?: string;
   bookmarkedAt: Date;
   notes?: string;
   status: 'saved' | 'applied' | 'interviewing' | 'offered' | 'rejected';
+  createdAt?: Date;
+  updatedAt?: Date;
+  remote?: boolean;
+  experienceLevel?: string;
+  employmentType?: string;
 }
 
 export default function SavedJobsPage() {
@@ -40,65 +54,68 @@ export default function SavedJobsPage() {
   // Mock saved jobs data
   const mockSavedJobs: SavedJob[] = [
     {
-      ...{
-        id: '1',
-        title: 'Senior Frontend Developer',
-        company: 'TechCorp',
-        location: 'San Francisco, CA (Remote)',
-        description: 'We are seeking a Senior Frontend Developer with expertise in React to join our growing team...',
-        requirements: [
-          'Bachelor\'s degree in Computer Science or related field',
-          '5+ years of experience in frontend development',
-          'Strong proficiency in React and TypeScript'
-        ],
-        skills: ['React', 'TypeScript', 'Redux', 'NextJS', 'Tailwind CSS'],
-        salary: '$120,000 - $150,000',
-        createdAt: new Date('2023-11-01'),
-        updatedAt: new Date('2023-11-01')
-      },
+      id: '1',
+      title: 'Senior Frontend Developer',
+      company: 'TechCorp',
+      location: 'San Francisco, CA (Remote)',
+      description: 'We are seeking a Senior Frontend Developer with expertise in React to join our growing team...',
+      requirements: [
+        'Bachelor\'s degree in Computer Science or related field',
+        '5+ years of experience in frontend development',
+        'Strong proficiency in React and TypeScript'
+      ],
+      skills: ['React', 'TypeScript', 'Redux', 'NextJS', 'Tailwind CSS'],
+      salary: '$120,000 - $150,000',
       bookmarkedAt: new Date('2023-11-10'),
       notes: 'Great company culture, need to prepare for React performance questions',
-      status: 'applied'
+      status: 'applied',
+      createdAt: new Date('2023-11-01'),
+      updatedAt: new Date('2023-11-01'),
+      remote: true,
+      experienceLevel: 'Senior',
+      employmentType: 'Full-time'
     },
     {
-      ...{
-        id: '2',
-        title: 'UX Designer',
-        company: 'DesignHub',
-        location: 'New York, NY',
-        description: 'DesignHub is looking for a talented UX Designer to create intuitive and engaging user experiences...',
-        requirements: [
-          'Bachelor\'s degree in Design or related field',
-          '3+ years of experience in UX design',
-          'Portfolio showcasing design projects'
-        ],
-        skills: ['Figma', 'User Research', 'Wireframing', 'Prototyping', 'Design Systems'],
-        salary: '$90,000 - $120,000',
-        createdAt: new Date('2023-10-25'),
-        updatedAt: new Date('2023-10-25')
-      },
+      id: '2',
+      title: 'UX Designer',
+      company: 'DesignHub',
+      location: 'New York, NY',
+      description: 'DesignHub is looking for a talented UX Designer to create intuitive and engaging user experiences...',
+      requirements: [
+        'Bachelor\'s degree in Design or related field',
+        '3+ years of experience in UX design',
+        'Portfolio showcasing design projects'
+      ],
+      skills: ['Figma', 'User Research', 'Wireframing', 'Prototyping', 'Design Systems'],
+      salary: '$90,000 - $120,000',
       bookmarkedAt: new Date('2023-11-05'),
-      status: 'interviewing'
+      status: 'interviewing',
+      createdAt: new Date('2023-10-25'),
+      updatedAt: new Date('2023-10-25'),
+      remote: false,
+      experienceLevel: 'Mid-Level',
+      employmentType: 'Full-time'
     },
     {
-      ...{
-        id: '3',
-        title: 'Full Stack Developer',
-        company: 'StartupVision',
-        location: 'Remote',
-        description: 'StartupVision is seeking a Full Stack Developer to help build our innovative platform...',
-        requirements: [
-          'Strong knowledge of frontend and backend technologies',
-          '2+ years of experience in full stack development',
-          'Experience with cloud services (AWS, GCP, or Azure)'
-        ],
-        skills: ['JavaScript', 'Node.js', 'React', 'PostgreSQL', 'Docker'],
-        createdAt: new Date('2023-11-05'),
-        updatedAt: new Date('2023-11-05')
-      },
+      id: '3',
+      title: 'Full Stack Developer',
+      company: 'StartupVision',
+      location: 'Remote',
+      description: 'StartupVision is seeking a Full Stack Developer to help build our innovative platform...',
+      requirements: [
+        'Strong knowledge of frontend and backend technologies',
+        '2+ years of experience in full stack development',
+        'Experience with cloud services (AWS, GCP, or Azure)'
+      ],
+      skills: ['JavaScript', 'Node.js', 'React', 'PostgreSQL', 'Docker'],
       bookmarkedAt: new Date('2023-11-12'),
       notes: 'Need to highlight my AWS experience in the resume',
-      status: 'saved'
+      status: 'saved',
+      createdAt: new Date('2023-11-05'),
+      updatedAt: new Date('2023-11-05'),
+      remote: true,
+      experienceLevel: 'Mid-Level',
+      employmentType: 'Full-time'
     }
   ];
 

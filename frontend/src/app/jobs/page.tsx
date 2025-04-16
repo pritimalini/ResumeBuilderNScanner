@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Search, Briefcase, MapPin, Filter, X } from 'lucide-react';
 import Link from 'next/link';
-import jobService, { JobPosting } from '@/services/jobService';
+import { jobService } from '@/services/jobService';
+import { JobPosting } from '@/types/job';
 
 export default function JobsPage() {
   const [jobs, setJobs] = useState<JobPosting[]>([]);

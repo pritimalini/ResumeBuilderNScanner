@@ -22,7 +22,8 @@ import {
   BriefcaseIcon,
 } from 'lucide-react';
 import Link from 'next/link';
-import jobService, { JobPosting } from '@/services/jobService';
+import { jobService } from '@/services/jobService';
+import { JobPosting } from '@/types/job';
 
 interface OptimizationSuggestion {
   section: 'summary' | 'experience' | 'skills' | 'education';
