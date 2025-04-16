@@ -1,0 +1,23 @@
+{
+  "name": "resumebuilder-n-scanner",
+  "version": "1.0.0",
+  "description": "A comprehensive system for scoring resumes against job descriptions and building ATS-optimized resumes from scratch.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pritimalini/ResumeBuilderNScanner.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pritimalini/ResumeBuilderNScanner/issues"
+  },
+  "homepage": "https://github.com/pritimalini/ResumeBuilderNScanner#readme",
+  "dependencies": {
+    "next-themes": "^0.4.6"
+  }
+}
