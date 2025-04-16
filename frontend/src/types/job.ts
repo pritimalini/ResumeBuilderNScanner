@@ -10,8 +10,8 @@ export interface JobPosting {
   employmentType: string;
   skills: string[];
   datePosted: string;
-  createdAt?: string | Date;
-  updatedAt?: string | Date;
+  createdAt?: string;
+  updatedAt?: string;
   requirements?: string[];
   benefits?: string[];
   applicationUrl?: string;

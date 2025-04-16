@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { 
@@ -46,9 +46,37 @@ export default function JobMatchesPage() {
     fetchMatchedJobs();
   }, []);
 
+  const applyFilters = useCallback(() => {
+    if (matchedJobs.length === 0) return;
+    
+    let filtered = [...matchedJobs];
+    
+    // Apply search filter
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(item => 
+        item.job.title.toLowerCase().includes(query) || 
+        item.job.company.toLowerCase().includes(query) ||
+        item.job.skills.some(skill => skill.toLowerCase().includes(query))
+      );
+    }
+    
+    // Apply match score filter
+    if (minMatchScore > 0) {
+      filtered = filtered.filter(item => item.matchScore >= minMatchScore);
+    }
+    
+    // Apply location filter
+    if (selectedLocation) {
+      filtered = filtered.filter(item => item.job.location === selectedLocation);
+    }
+    
+    setFilteredJobs(filtered);
+  }, [searchQuery, minMatchScore, selectedLocation, matchedJobs]);
+
   useEffect(() => {
     applyFilters();
-  }, [matchedJobs, searchQuery, minMatchScore, selectedLocation]);
+  }, [applyFilters]);
 
   const fetchMatchedJobs = async () => {
     try {
@@ -97,32 +125,6 @@ export default function JobMatchesPage() {
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
-  };
-
-  const applyFilters = () => {
-    let filtered = [...matchedJobs];
-    
-    // Apply search filter
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(item => 
-        item.job.title.toLowerCase().includes(query) || 
-        item.job.company.toLowerCase().includes(query) ||
-        item.job.skills.some(skill => skill.toLowerCase().includes(query))
-      );
-    }
-    
-    // Apply match score filter
-    if (minMatchScore > 0) {
-      filtered = filtered.filter(item => item.matchScore >= minMatchScore);
-    }
-    
-    // Apply location filter
-    if (selectedLocation) {
-      filtered = filtered.filter(item => item.job.location === selectedLocation);
-    }
-    
-    setFilteredJobs(filtered);
   };
 
   const resetFilters = () => {

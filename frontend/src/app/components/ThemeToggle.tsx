@@ -13,8 +13,16 @@ export const ThemeToggle = () => {
     setMounted(true);
   }, []);
 
+  // Return a placeholder with the same dimensions to avoid layout shift
   if (!mounted) {
-    return null;
+    return (
+      <button
+        className="rounded-md p-2 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+        aria-label="Toggle theme"
+      >
+        <div className="h-5 w-5" />
+      </button>
+    );
   }
 
   return (

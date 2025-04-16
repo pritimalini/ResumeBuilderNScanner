@@ -28,11 +28,11 @@ interface SavedJob {
   requirements?: string[];
   skills: string[];
   salary?: string;
-  bookmarkedAt: Date;
+  bookmarkedAt: string;
   notes?: string;
   status: 'saved' | 'applied' | 'interviewing' | 'offered' | 'rejected';
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt?: string;
+  updatedAt?: string;
   remote?: boolean;
   experienceLevel?: string;
   employmentType?: string;
@@ -66,11 +66,11 @@ export default function SavedJobsPage() {
       ],
       skills: ['React', 'TypeScript', 'Redux', 'NextJS', 'Tailwind CSS'],
       salary: '$120,000 - $150,000',
-      bookmarkedAt: new Date('2023-11-10'),
+      bookmarkedAt: '2023-11-10',
       notes: 'Great company culture, need to prepare for React performance questions',
       status: 'applied',
-      createdAt: new Date('2023-11-01'),
-      updatedAt: new Date('2023-11-01'),
+      createdAt: '2023-11-01',
+      updatedAt: '2023-11-01',
       remote: true,
       experienceLevel: 'Senior',
       employmentType: 'Full-time'
@@ -88,10 +88,10 @@ export default function SavedJobsPage() {
       ],
       skills: ['Figma', 'User Research', 'Wireframing', 'Prototyping', 'Design Systems'],
       salary: '$90,000 - $120,000',
-      bookmarkedAt: new Date('2023-11-05'),
+      bookmarkedAt: '2023-11-05',
       status: 'interviewing',
-      createdAt: new Date('2023-10-25'),
-      updatedAt: new Date('2023-10-25'),
+      createdAt: '2023-10-25',
+      updatedAt: '2023-10-25',
       remote: false,
       experienceLevel: 'Mid-Level',
       employmentType: 'Full-time'
@@ -108,11 +108,11 @@ export default function SavedJobsPage() {
         'Experience with cloud services (AWS, GCP, or Azure)'
       ],
       skills: ['JavaScript', 'Node.js', 'React', 'PostgreSQL', 'Docker'],
-      bookmarkedAt: new Date('2023-11-12'),
+      bookmarkedAt: '2023-11-12',
       notes: 'Need to highlight my AWS experience in the resume',
       status: 'saved',
-      createdAt: new Date('2023-11-05'),
-      updatedAt: new Date('2023-11-05'),
+      createdAt: '2023-11-05',
+      updatedAt: '2023-11-05',
       remote: true,
       experienceLevel: 'Mid-Level',
       employmentType: 'Full-time'
@@ -158,11 +158,11 @@ export default function SavedJobsPage() {
       results = results.filter(job => job.status === filters.status);
     }
     
-    // Sort jobs
+    // Sort jobs - parse strings to Date objects only when needed for comparison
     if (filters.sortBy === 'dateDesc') {
-      results.sort((a, b) => b.bookmarkedAt.getTime() - a.bookmarkedAt.getTime());
+      results.sort((a, b) => new Date(b.bookmarkedAt).getTime() - new Date(a.bookmarkedAt).getTime());
     } else if (filters.sortBy === 'dateAsc') {
-      results.sort((a, b) => a.bookmarkedAt.getTime() - b.bookmarkedAt.getTime());
+      results.sort((a, b) => new Date(a.bookmarkedAt).getTime() - new Date(b.bookmarkedAt).getTime());
     } else if (filters.sortBy === 'company') {
       results.sort((a, b) => a.company.localeCompare(b.company));
     }
@@ -367,7 +367,7 @@ export default function SavedJobsPage() {
                   </div>
                   <div className="flex items-center text-gray-500 text-sm">
                     <Clock size={14} className="mr-1" />
-                    <span>Saved on {job.bookmarkedAt.toLocaleDateString()}</span>
+                    <span>Saved on {new Date(job.bookmarkedAt).toLocaleDateString()}</span>
                   </div>
                 </div>
                 

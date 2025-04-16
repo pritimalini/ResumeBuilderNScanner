@@ -280,7 +280,7 @@ export default function JobsPage() {
               <div className="flex justify-between">
                 <h2 className="text-xl font-semibold mb-2">{job.title}</h2>
                 <span className="text-sm text-gray-500">
-                  {new Date(job.createdAt).toLocaleDateString()}
+                  {job.createdAt ? new Date(job.createdAt).toLocaleDateString() : 'No date'}
                 </span>
               </div>
               
