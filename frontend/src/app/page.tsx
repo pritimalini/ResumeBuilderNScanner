@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { ChevronRight, FileText, Award, BarChart, Clock, LogIn, UserPlus, Check, ArrowRight, Star } from 'lucide-react';
+import { ChevronRight, FileText, Award, BarChart, Clock, LogIn, UserPlus, Check, ArrowRight, Star, Briefcase } from 'lucide-react';
 import { ThemeToggle } from './components/ThemeToggle';
 
 export default function Home() {
@@ -281,15 +281,15 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ 
                   scale: 1.05, 
-                  boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)",
+                  boxShadow: "0 15px 30px -10px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
                   y: -5 
                 }}
                 animate={{ 
                   scale: activeFeature === index ? 1.05 : 1,
-                  boxShadow: activeFeature === index ? "0 10px 25px -5px rgba(0, 0, 0, 0.1)" : "none",
+                  boxShadow: activeFeature === index ? "0 15px 30px -10px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)" : "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
                   y: activeFeature === index ? -5 : 0
                 }}
-                className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md transition-all duration-300"
+                className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md transition-all duration-300 border border-gray-100 dark:border-gray-700"
               >
                 <motion.div 
                   animate={{ 
@@ -324,75 +324,114 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="max-w-4xl mx-auto">
             {[
               {
                 step: 1,
                 title: "Create an Account",
-                description: "Sign up in 30 seconds. No credit card required to start transforming your job search."
+                description: "Sign up in 30 seconds. No credit card required to start transforming your job search.",
+                icon: <UserPlus className="h-8 w-8 text-blue-600 dark:text-blue-400" />
               },
               {
                 step: 2,
                 title: "Build or Upload Your Resume",
-                description: "Use our AI-powered builder to create a stunning resume or instantly analyze your existing one."
+                description: "Use our AI-powered builder to create a stunning resume or instantly analyze your existing one.",
+                icon: <FileText className="h-8 w-8 text-blue-600 dark:text-blue-400" />
               },
               {
                 step: 3,
-                title: "Start Getting Interviews",
-                description: "Apply with your optimized resume and watch as interview invitations start flooding your inbox."
+                title: "Get Your Personalized Analysis",
+                description: "Our AI analyzes your resume against job descriptions and provides tailored recommendations to boost your chances.",
+                icon: <BarChart className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+              },
+              {
+                step: 4,
+                title: "Apply and Land Interviews",
+                description: "Apply to jobs with your optimized resume and watch as interview invitations start flooding your inbox.",
+                icon: <Briefcase className="h-8 w-8 text-blue-600 dark:text-blue-400" />
               }
             ].map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50, y: 20 }}
+                whileInView={{ opacity: 1, x: 0, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
-                className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-md relative overflow-hidden"
+                transition={{ 
+                  duration: 0.7,
+                  delay: index * 0.2,
+                  type: "spring",
+                  stiffness: 50
+                }}
+                className="mb-12 relative"
               >
-                <motion.div 
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ type: "spring", stiffness: 300, delay: 0.3 + index * 0.2 }}
-                  className="absolute top-0 right-0 bg-blue-600 text-white w-12 h-12 flex items-center justify-center text-xl font-bold"
-                >
-                  {item.step}
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.5 + index * 0.2 }}
-                >
+                {/* Connecting Line */}
+                {index < 3 && (
+                  <motion.div 
+                    initial={{ height: 0 }}
+                    whileInView={{ height: "100%" }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1, delay: (index + 1) * 0.2 }}
+                    className="absolute left-7 top-16 w-1 bg-gradient-to-b from-blue-500 to-purple-500 z-0"
+                    style={{ 
+                      height: "calc(100% - 32px)"
+                    }}
+                  />
+                )}
+
+                <div className="flex gap-6">
+                  {/* Step Number Circle */}
+                  <div className="relative z-10">
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ 
+                        type: "spring", 
+                        stiffness: 300, 
+                        delay: index * 0.3
+                      }}
+                      className="w-14 h-14 bg-blue-600 dark:bg-blue-500 rounded-full flex items-center justify-center text-xl font-bold text-white shadow-lg"
+                    >
+                      {item.step}
+                    </motion.div>
+                  </div>
+
+                  {/* Content Card */}
                   <motion.div
-                    whileHover={{ rotate: 5 }}
-                    className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-6 mt-4"
+                    whileHover={{ 
+                      y: -5, 
+                      boxShadow: "0 15px 30px -10px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)" 
+                    }}
+                    className={`flex-1 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 ${
+                      index % 2 === 0 ? 'rounded-tl-none' : 'rounded-tr-none'
+                    }`}
                   >
-                    <Check className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+                    <div className="flex items-start gap-4">
+                      <div className="bg-blue-100 dark:bg-blue-900/30 rounded-full p-3 mt-1">
+                        {item.icon}
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-semibold mb-3 dark:text-white">{item.title}</h3>
+                        <p className="text-gray-600 dark:text-gray-300">{item.description}</p>
+                      </div>
+                    </div>
                   </motion.div>
-                  <h3 className="text-xl font-semibold mb-4 dark:text-white">{item.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-300">{item.description}</p>
-                </motion.div>
+                </div>
               </motion.div>
             ))}
           </div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.8 }}
-            className="flex justify-center mt-12"
+            transition={{ duration: 0.5, delay: 1 }}
+            className="text-center mt-10"
           >
-            <motion.div
-              whileHover={{ scale: 1.05, x: 10 }}
-              className="flex items-center text-blue-600 dark:text-blue-400 font-medium cursor-pointer"
-            >
-              <span>Learn more about our process</span>
+            <Link href="/signup" className="inline-flex items-center bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-8 rounded-lg font-medium hover:shadow-lg transition-all duration-300">
+              Get Started Now
               <ArrowRight className="ml-2 h-5 w-5" />
-            </motion.div>
+            </Link>
           </motion.div>
         </div>
       </section>
@@ -492,7 +531,12 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md flex flex-col h-full"
+                whileHover={{ 
+                  y: -5,
+                  boxShadow: "0 15px 30px -10px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+                  borderColor: "rgba(209, 213, 219, 1)"
+                }}
+                className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md flex flex-col h-full relative border border-gray-100 dark:border-gray-700"
               >
                 <div className="flex items-center mb-4">
                   <div className="w-12 h-12 bg-gray-200 dark:bg-gray-700 rounded-full mr-3 flex-shrink-0 overflow-hidden">
