@@ -1,213 +1,225 @@
-import { JobPosting } from "@/types/job";
+import supabase from '../utils/supabaseClient.js';
+import { JobPosting } from '../types/job';
 
-// Mock job data
-const mockJobs: JobPosting[] = [
-  {
-    id: "job-1",
-    title: "Frontend Developer",
-    company: "TechCorp Inc.",
-    location: "San Francisco, CA",
-    remote: true,
-    salary: "$90,000 - $120,000",
-    description: "We are looking for a skilled Frontend Developer to join our team. The ideal candidate will have experience with React, Next.js, and TypeScript.",
-    experienceLevel: "Mid-Level",
-    employmentType: "Full-time",
-    skills: ["React", "TypeScript", "HTML/CSS", "Next.js", "Redux"],
-    datePosted: "2023-10-15",
-    requirements: [
-      "3+ years of experience with React",
-      "Strong knowledge of TypeScript",
-      "Experience with state management (Redux, Context API)",
-      "Bachelor's degree in Computer Science or related field"
-    ],
-    benefits: [
-      "Flexible working hours",
-      "Remote work options",
-      "Health insurance",
-      "401(k) matching",
-      "Professional development budget"
-    ],
-    applicationUrl: "https://techcorp.com/careers/frontend-developer"
-  },
-  {
-    id: "job-2",
-    title: "UX/UI Designer",
-    company: "Creative Solutions",
-    location: "New York, NY",
-    remote: false,
-    salary: "$80,000 - $110,000",
-    description: "Creative Solutions is seeking a talented UX/UI Designer to create beautiful, intuitive user experiences for our clients. You will work closely with our development team to transform concepts into user-friendly interfaces.",
-    experienceLevel: "Senior",
-    employmentType: "Full-time",
-    skills: ["Figma", "Adobe XD", "Sketch", "User Research", "Prototyping"],
-    datePosted: "2023-10-10",
-    requirements: [
-      "5+ years of experience in UX/UI design",
-      "Portfolio demonstrating strong design skills",
-      "Experience with user research and testing",
-      "Excellent communication skills"
-    ],
-    benefits: [
-      "Creative work environment",
-      "Health and dental insurance",
-      "Paid time off",
-      "Design conference stipend"
-    ]
-  },
-  {
-    id: "job-3",
-    title: "Data Scientist",
-    company: "Insight Analytics",
-    location: "Boston, MA",
-    remote: true,
-    salary: "$120,000 - $150,000",
-    description: "Join our data science team to develop machine learning models and analyze complex datasets. You will help drive business decisions through data insights and build predictive models.",
-    experienceLevel: "Senior",
-    employmentType: "Full-time",
-    skills: ["Python", "Machine Learning", "SQL", "Data Visualization", "Statistical Analysis"],
-    datePosted: "2023-10-05",
-    requirements: [
-      "Master's or PhD in Computer Science, Statistics, or related field",
-      "Experience with machine learning frameworks (TensorFlow, PyTorch)",
-      "Strong SQL skills",
-      "Experience with data visualization tools"
-    ],
-    benefits: [
-      "Flexible schedule",
-      "Remote work option",
-      "Comprehensive benefits package",
-      "Continuing education support"
-    ]
-  },
-  {
-    id: "job-4",
-    title: "Backend Developer",
-    company: "ServerStack",
-    location: "Seattle, WA",
-    remote: true,
-    salary: "$95,000 - $130,000",
-    description: "ServerStack is looking for a Backend Developer to build robust and scalable server-side applications. You will be responsible for implementing API endpoints, optimizing database queries, and ensuring high performance.",
-    experienceLevel: "Mid-Level",
-    employmentType: "Full-time",
-    skills: ["Node.js", "Express", "MongoDB", "RESTful APIs", "GraphQL"],
-    datePosted: "2023-10-12",
-    requirements: [
-      "3+ years of experience with Node.js",
-      "Experience with NoSQL databases",
-      "Knowledge of API design principles",
-      "Understanding of server security concepts"
-    ],
-    benefits: [
-      "Competitive salary",
-      "Health and wellness benefits",
-      "Flexible work environment",
-      "Professional development opportunities"
-    ]
-  },
-  {
-    id: "job-5",
-    title: "Full Stack Developer",
-    company: "Innovate Solutions",
-    location: "Austin, TX",
-    remote: false,
-    salary: "$100,000 - $140,000",
-    description: "We're seeking a Full Stack Developer who can work on both frontend and backend technologies. You'll be involved in all stages of development, from concept to deployment.",
-    experienceLevel: "Senior",
-    employmentType: "Full-time",
-    skills: ["JavaScript", "React", "Node.js", "SQL", "AWS", "Docker"],
-    datePosted: "2023-10-08",
-    requirements: [
-      "5+ years of full stack development experience",
-      "Strong JavaScript skills",
-      "Experience with cloud services (AWS, Azure, GCP)",
-      "Knowledge of CI/CD pipelines"
-    ],
-    benefits: [
-      "Competitive compensation package",
-      "Health and retirement benefits",
-      "Flexible work hours",
-      "Modern office environment"
-    ]
-  }
-];
+export type Job = JobPosting;
 
-class JobService {
-  // Get all jobs
-  async getAllJobs(): Promise<JobPosting[]> {
-    // Simulate API call
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(mockJobs);
-      }, 800);
-    });
-  }
-
-  // Get job by ID
-  async getJobById(id: string): Promise<JobPosting | null> {
-    // Simulate API call
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const job = mockJobs.find(job => job.id === id);
-        resolve(job || null);
-      }, 500);
-    });
-  }
-
-  // Search jobs by query (title, company, description)
-  async searchJobs(query: string): Promise<JobPosting[]> {
-    // Simulate API call
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        if (!query.trim()) {
-          resolve(mockJobs);
-          return;
-        }
-        
-        const lowerQuery = query.toLowerCase();
-        const filtered = mockJobs.filter(job => 
-          job.title.toLowerCase().includes(lowerQuery) ||
-          job.company.toLowerCase().includes(lowerQuery) ||
-          job.description.toLowerCase().includes(lowerQuery) ||
-          job.skills.some((skill: string) => skill.toLowerCase().includes(lowerQuery))
-        );
-        
-        resolve(filtered);
-      }, 600);
-    });
-  }
-
-  // Match resume to job
-  async matchResumeToJob(jobId: string, resumeId: string): Promise<{
-    score: number;
-    matchedSkills: string[];
-    missingSkills: string[];
-    feedback: string;
-  }> {
-    // Simulate API call
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const job = mockJobs.find(job => job.id === jobId);
-        
-        if (!job) {
-          throw new Error("Job not found");
-        }
-        
-        // Mock match result - in a real app this would analyze the resume against the job
-        const matchedSkills = job.skills.filter((_, index) => index % 2 === 0);
-        const missingSkills = job.skills.filter((_, index) => index % 2 !== 0);
-        const score = Math.floor(70 + Math.random() * 30);
-        
-        resolve({
-          score,
-          matchedSkills,
-          missingSkills,
-          feedback: score > 80 
-            ? "Your resume is a strong match for this position. Consider highlighting your experience with " + matchedSkills.join(", ") + "."
-            : "Your resume partially matches this job. Consider adding more details about your experience with " + missingSkills.join(", ") + "."
-        });
-      }, 1200);
-    });
-  }
+export interface JobMatch {
+  jobId: string;
+  title: string;
+  company: string;
+  location: string;
+  overallMatchScore: number;
+  skillsMatchScore: number;
+  experienceMatchScore: number;
+  educationMatchScore: number;
+  matchedSkills: string[];
+  missingSkills: string[];
+  recommendationToImprove: string;
 }
 
-export const jobService = new JobService(); 
+export const jobService = {
+  /**
+   * Fetch all jobs from the database
+   */
+  async getAllJobs(): Promise<Job[]> {
+    try {
+      const { data, error } = await supabase
+        .from('jobs')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching jobs:', error);
+        throw error;
+      }
+
+      return data || [];
+    } catch (error) {
+      console.error('Failed to fetch jobs:', error);
+      throw error;
+    }
+  },
+
+  /**
+   * Fetch a single job by ID
+   */
+  async getJobById(jobId: string): Promise<Job | null> {
+    try {
+      const { data, error } = await supabase
+        .from('jobs')
+        .select('*')
+        .eq('id', jobId)
+        .single();
+
+      if (error) {
+        console.error(`Error fetching job with ID ${jobId}:`, error);
+        throw error;
+      }
+
+      return data;
+    } catch (error) {
+      console.error(`Failed to fetch job with ID ${jobId}:`, error);
+      throw error;
+    }
+  },
+
+  /**
+   * Search for jobs based on a query
+   */
+  async searchJobs(query: string): Promise<Job[]> {
+    try {
+      const { data, error } = await supabase
+        .from('jobs')
+        .select('*')
+        .or(`title.ilike.%${query}%,description.ilike.%${query}%,company.ilike.%${query}%`)
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Error searching jobs:', error);
+        throw error;
+      }
+
+      return data || [];
+    } catch (error) {
+      console.error('Failed to search jobs:', error);
+      throw error;
+    }
+  },
+
+  /**
+   * Filter jobs by location
+   */
+  async filterJobsByLocation(location: string): Promise<Job[]> {
+    try {
+      const { data, error } = await supabase
+        .from('jobs')
+        .select('*')
+        .ilike('location', `%${location}%`)
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Error filtering jobs by location:', error);
+        throw error;
+      }
+
+      return data || [];
+    } catch (error) {
+      console.error('Failed to filter jobs by location:', error);
+      throw error;
+    }
+  },
+
+  /**
+   * Filter jobs by skills
+   */
+  async filterJobsBySkills(skills: string[]): Promise<Job[]> {
+    try {
+      const { data, error } = await supabase
+        .from('jobs')
+        .select('*');
+
+      if (error) {
+        console.error('Error filtering jobs by skills:', error);
+        throw error;
+      }
+
+      // Filter jobs that contain at least one of the specified skills
+      const filteredJobs = data?.filter((job: Job) => {
+        if (!job.skills) return false;
+        return skills.some(skill => 
+          job.skills.some((jobSkill: string) => 
+            jobSkill.toLowerCase().includes(skill.toLowerCase())
+          )
+        );
+      });
+
+      return filteredJobs || [];
+    } catch (error) {
+      console.error('Failed to filter jobs by skills:', error);
+      throw error;
+    }
+  },
+
+  /**
+   * Match a resume with jobs
+   */
+  async matchResumeWithJobs(resumeId: string, jobIds?: string[]): Promise<JobMatch[]> {
+    try {
+      const response = await fetch('/api/match-resume-with-jobs', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          resumeId,
+          jobIds,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data.matches || [];
+    } catch (error) {
+      console.error('Failed to match resume with jobs:', error);
+      throw error;
+    }
+  },
+
+  /**
+   * Get existing job matches for a resume
+   */
+  async getJobMatchesForResume(resumeId: string): Promise<JobMatch[]> {
+    try {
+      const { data, error } = await supabase
+        .from('resume_job_matches')
+        .select(`
+          id,
+          overall_match_score,
+          skills_match_score,
+          experience_match_score,
+          education_match_score,
+          matched_skills,
+          missing_skills,
+          recommendation,
+          jobs (
+            id,
+            title,
+            company,
+            location
+          )
+        `)
+        .eq('resume_id', resumeId)
+        .order('overall_match_score', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching job matches:', error);
+        throw error;
+      }
+
+      // Transform data to the expected format
+      const matches = data?.map((match: any) => ({
+        jobId: match.jobs.id,
+        title: match.jobs.title,
+        company: match.jobs.company,
+        location: match.jobs.location,
+        overallMatchScore: match.overall_match_score,
+        skillsMatchScore: match.skills_match_score,
+        experienceMatchScore: match.experience_match_score,
+        educationMatchScore: match.education_match_score,
+        matchedSkills: match.matched_skills || [],
+        missingSkills: match.missing_skills || [],
+        recommendationToImprove: match.recommendation || '',
+      })) || [];
+
+      return matches;
+    } catch (error) {
+      console.error('Failed to fetch job matches:', error);
+      throw error;
+    }
+  }
+};
+
+export default jobService; 

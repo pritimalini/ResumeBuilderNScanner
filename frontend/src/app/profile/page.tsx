@@ -188,7 +188,7 @@ export default function ProfilePage() {
                           <div className="flex items-center text-gray-500 mb-4">
                             <Clock size={14} className="mr-1" />
                             <span className="text-sm">
-                              Last updated {new Date(resume.updatedAt).toLocaleDateString()}
+                              Last updated {new Date(resume.updated_at).toLocaleDateString()}
                             </span>
                           </div>
                         </div>

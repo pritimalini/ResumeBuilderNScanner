@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 
 export default function SignupPage() {
   const router = useRouter();
-  const { register, error: authError } = useAuth();
+  const { signUp } = useAuth();
   
   // Form state
   const [formData, setFormData] = useState({
@@ -104,13 +104,21 @@ export default function SignupPage() {
     setErrors({ ...errors, form: '' });
     
     try {
-      await register(formData.name, formData.email, formData.password);
+      const { error } = await signUp(formData.email, formData.password, formData.name);
+      
+      if (error) {
+        setErrors({
+          ...errors,
+          form: error
+        });
+        return;
+      }
       
       router.push('/dashboard');
     } catch (error: any) {
       setErrors({
         ...errors,
-        form: error.response?.data?.message || 'Failed to create account. Please try again.',
+        form: error.message || 'Failed to create account. Please try again.',
       });
     } finally {
       setLoading(false);

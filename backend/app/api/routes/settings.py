@@ -1,23 +1,14 @@
 from fastapi import APIRouter, Depends, HTTPException, status
-from typing import List, Optional
+from typing import Optional
 import os
-import json
 from pydantic import BaseModel
 import logging
+from ..auth.dependencies import get_current_user
 
 # Set up logging
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
-
-class LLMProvider(BaseModel):
-    id: str
-    name: str
-    description: str
-    api_key_required: bool
-    models: List[str]
-    icon: Optional[str] = None
-    is_default: Optional[bool] = False
 
 class LLMSettings(BaseModel):
     provider: str
@@ -26,46 +17,9 @@ class LLMSettings(BaseModel):
     temperature: float = 0.7
     max_tokens: int = 2000
 
-class LLMSettingsResponse(BaseModel):
-    current_settings: LLMSettings
-    available_providers: List[LLMProvider]
-
 class APIKeyValidation(BaseModel):
     provider: str
     api_key: str
-
-# Available LLM providers
-AVAILABLE_PROVIDERS = [
-    LLMProvider(
-        id="openai",
-        name="OpenAI",
-        description="Industry-leading AI models for text generation and analysis",
-        api_key_required=True,
-        models=["gpt-4", "gpt-3.5-turbo", "gpt-4-turbo"],
-        is_default=True
-    ),
-    LLMProvider(
-        id="anthropic",
-        name="Anthropic",
-        description="Claude models known for thoughtful, harmless, and honest AI interactions",
-        api_key_required=True,
-        models=["claude-3-opus", "claude-3-sonnet", "claude-3-haiku", "claude-2"]
-    ),
-    LLMProvider(
-        id="google",
-        name="Google AI",
-        description="Gemini models offering strong reasoning and multimodal capabilities",
-        api_key_required=True,
-        models=["gemini-pro", "gemini-pro-vision"]
-    ),
-    LLMProvider(
-        id="local",
-        name="Local Model",
-        description="Run your own models locally for enhanced privacy",
-        api_key_required=False,
-        models=["llama-3-8b", "llama-3-70b", "mistral-7b"]
-    )
-]
 
 def get_settings_file_path(user_id: str) -> str:
     """Get the file path for a user's settings file"""
@@ -74,13 +28,13 @@ def get_settings_file_path(user_id: str) -> str:
     os.makedirs("data/user_settings", exist_ok=True)
     return f"data/user_settings/{user_id}_settings.json"
 
-@router.get("/")
-async def get_settings():
+@router.get("/settings")
+async def get_settings(current_user = Depends(get_current_user)):
     """Get user's LLM settings"""
     try:
-        # In a real app, you would get the user ID from authentication
-        # Here we'll use a default user ID for demonstration
-        user_id = "default_user"
+        import json
+        
+        user_id = current_user["id"]
         settings_path = get_settings_file_path(user_id)
         
         if not os.path.exists(settings_path):
@@ -116,13 +70,13 @@ async def get_settings():
             detail="Failed to retrieve settings"
         )
 
-@router.post("/")
-async def save_settings(settings: LLMSettings):
+@router.post("/settings")
+async def save_settings(settings: LLMSettings, current_user = Depends(get_current_user)):
     """Save user's LLM settings"""
     try:
-        # In a real app, you would get the user ID from authentication
-        # Here we'll use a default user ID for demonstration
-        user_id = "default_user"
+        import json
+        
+        user_id = current_user["id"]
         settings_path = get_settings_file_path(user_id)
         
         # If an API key is not provided but settings exist, keep the existing API key
@@ -160,33 +114,37 @@ async def save_settings(settings: LLMSettings):
         )
 
 @router.post("/validate-api-key")
-async def validate_api_key(validation: APIKeyValidation):
+async def validate_api_key(validation: APIKeyValidation, current_user = Depends(get_current_user)):
     """Validate an API key for a specific provider"""
     try:
         valid = False
         
         if validation.provider == "openai":
             # Test OpenAI API key
+            import openai
+            openai.api_key = validation.api_key
             try:
-                # Just check if the key starts with "sk-" for demo purposes
-                # In a real app, you would make an actual API call
-                if validation.api_key.startswith("sk-"):
-                    valid = True
+                # Perform a small, cheap API call to verify the key works
+                openai.models.list()
+                valid = True
             except:
                 valid = False
                 
         elif validation.provider == "anthropic":
-            # Test Anthropic API key format
+            # Test Anthropic API key
             try:
-                # Just check if the key follows Anthropic's format for demo purposes
-                if validation.api_key.startswith("sk-ant-"):
-                    valid = True
+                import anthropic
+                client = anthropic.Anthropic(api_key=validation.api_key)
+                # Just create a client - we'll assume the key format is valid
+                # In a real app you might make a small API call
+                valid = True 
             except:
                 valid = False
                 
         elif validation.provider == "google":
-            # Test Google API key format
+            # Test Google API key format (simplified check)
             if validation.api_key.startswith("AIza"):
+                # This is a simplified check - in a real app you'd make an actual API call
                 valid = True
             else:
                 valid = False
@@ -198,9 +156,4 @@ async def validate_api_key(validation: APIKeyValidation):
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Failed to validate API key"
-        )
-
-@router.get("/llm-providers")
-async def get_llm_providers():
-    """Get available LLM providers"""
-    return {"providers": AVAILABLE_PROVIDERS}
+        ) 

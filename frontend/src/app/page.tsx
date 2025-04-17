@@ -46,20 +46,19 @@ export default function Home() {
 
   return (
     <div className="w-full overflow-hidden dark:bg-gray-950 dark:text-white">
-      {/* Top Bar with Auth Buttons */}
-      <motion.div 
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="fixed w-full top-0 bg-white dark:bg-gray-900 shadow-sm z-50 py-4 px-8"
-      >
-        <div className="container mx-auto flex justify-between items-center">
-          <div className="flex items-center">
+      {/* Hero Section */}
+      <section className="relative min-h-[100vh] flex items-center pt-20 bg-white dark:bg-gray-950 text-gray-900 dark:text-white">
+        <motion.div 
+          style={{ opacity, scale }}
+          className="absolute inset-0 -z-10 bg-gradient-to-b from-blue-50 to-white dark:from-blue-950/30 dark:to-gray-950"
+        ></motion.div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center mb-12">
             <motion.span 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8 }}
-              className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+              className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
             >
               Resume<motion.span 
                 initial={{ scale: 0 }}
@@ -70,44 +69,35 @@ export default function Home() {
                 AI
               </motion.span>
             </motion.span>
-          </div>
-          <div className="flex space-x-4 items-center">
-            <ThemeToggle />
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Link 
-                href="/login" 
-                className="px-5 py-2 flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium rounded-lg border border-blue-600 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
+            <div className="flex space-x-4 items-center">
+              <ThemeToggle />
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <LogIn className="h-4 w-4 mr-2" />
-                Login
-              </Link>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Link 
-                href="/signup" 
-                className="px-5 py-2 flex items-center text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-md font-medium rounded-lg transition-all"
+                <Link 
+                  href="/login" 
+                  className="px-5 py-2 flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium rounded-lg border border-blue-600 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
+                >
+                  <LogIn className="h-4 w-4 mr-2" />
+                  Login
+                </Link>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="hidden sm:block"
               >
-                <UserPlus className="h-4 w-4 mr-2" />
-                Sign Up
-              </Link>
-            </motion.div>
+                <Link 
+                  href="/signup" 
+                  className="px-5 py-2 flex items-center text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-md font-medium rounded-lg transition-all"
+                >
+                  <UserPlus className="h-4 w-4 mr-2" />
+                  Sign Up
+                </Link>
+              </motion.div>
+            </div>
           </div>
-        </div>
-      </motion.div>
-
-      {/* Hero Section */}
-      <section className="relative min-h-[100vh] flex items-center pt-20 bg-white dark:bg-gray-950 text-gray-900 dark:text-white">
-        <motion.div 
-          style={{ opacity, scale }}
-          className="absolute inset-0 -z-10 bg-gradient-to-b from-blue-50 to-white dark:from-blue-950/30 dark:to-gray-950"
-        ></motion.div>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
