@@ -17,8 +17,14 @@ export default function RootLayout({
 }>) {
   const pathname = usePathname();
   
-  // Only show navbar on content pages, not on auth or home pages
-  const hideNavbarPages = ['/', '/login', '/signup', '/forgot-password', '/reset-password'];
+  // Only hide navbar on auth pages
+  const hideNavbarPages = [
+    '/login',
+  
+    '/signup',
+    '/forgot-password',
+    '/reset-password'
+  ];
   const showNavbar = !hideNavbarPages.includes(pathname);
   
   return (
@@ -37,11 +43,8 @@ export default function RootLayout({
         >
           <AuthProvider>
             <JobMatchProvider>
-              {/* Only show navbar on content pages */}
               {showNavbar && <Navbar />}
-              <main className={`min-h-screen ${showNavbar ? 'pt-16' : ''}`}>
-                {children}
-              </main>
+              {children}
             </JobMatchProvider>
           </AuthProvider>
         </ThemeProvider>

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { ChevronRight, FileText, Award, BarChart, Clock, LogIn, UserPlus, Check, ArrowRight, Star, Briefcase } from 'lucide-react';
+import { ChevronRight, FileText, Award, BarChart, Clock, LogIn, UserPlus, Check, ArrowRight, Star, Briefcase, XCircle } from 'lucide-react';
 import { ThemeToggle } from './components/ThemeToggle';
 
 export default function Home() {
@@ -47,57 +47,12 @@ export default function Home() {
   return (
     <div className="w-full overflow-hidden dark:bg-gray-950 dark:text-white">
       {/* Hero Section */}
-      <section className="relative min-h-[100vh] flex items-center pt-20 bg-white dark:bg-gray-950 text-gray-900 dark:text-white">
+      <section className="relative min-h-[90vh] flex items-center pt-20 bg-white dark:bg-gray-950 text-gray-900 dark:text-white">
         <motion.div 
           style={{ opacity, scale }}
           className="absolute inset-0 -z-10 bg-gradient-to-b from-blue-50 to-white dark:from-blue-950/30 dark:to-gray-950"
         ></motion.div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center mb-12">
-            <motion.span 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8 }}
-              className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
-            >
-              Resume<motion.span 
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.5, type: "spring", stiffness: 500 }}
-                className="text-blue-500"
-              >
-                AI
-              </motion.span>
-            </motion.span>
-            <div className="flex space-x-4 items-center">
-              <ThemeToggle />
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Link 
-                  href="/login" 
-                  className="px-5 py-2 flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium rounded-lg border border-blue-600 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
-                >
-                  <LogIn className="h-4 w-4 mr-2" />
-                  Login
-                </Link>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="hidden sm:block"
-              >
-                <Link 
-                  href="/signup" 
-                  className="px-5 py-2 flex items-center text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-md font-medium rounded-lg transition-all"
-                >
-                  <UserPlus className="h-4 w-4 mr-2" />
-                  Sign Up
-                </Link>
-              </motion.div>
-            </div>
-          </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -108,7 +63,7 @@ export default function Home() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, delay: 0.2 }}
-                className="text-5xl font-extrabold leading-tight mb-6 text-gray-900 dark:text-white"
+                className="text-6xl font-extrabold leading-tight mb-6 text-gray-900 dark:text-white"
               >
                 <motion.span 
                   initial={{ backgroundPosition: "200% 0%" }}
@@ -116,7 +71,7 @@ export default function Home() {
                   transition={{ duration: 1.5 }}
                   className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600"
                 >
-                  Build ATS-Optimized Resumes
+                  Transform Your Resume
                 </motion.span>
                 <br />
                 <motion.span
@@ -125,7 +80,7 @@ export default function Home() {
                   transition={{ duration: 0.8, delay: 0.8 }}
                   className="text-gray-900 dark:text-white"
                 >
-                  That Land Interviews
+                  Into Job Opportunities
                 </motion.span>
               </motion.h1>
               <motion.p
@@ -148,7 +103,7 @@ export default function Home() {
                 >
                   <Link 
                     href="/signup" 
-                    className="inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg hover:shadow-xl transition-all"
+                    className="inline-flex items-center justify-center px-8 py-4 rounded-lg font-medium bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg hover:shadow-xl transition-all text-lg"
                   >
                     Start Landing Interviews Today
                     <ChevronRight className="ml-2 h-5 w-5" />
@@ -160,7 +115,7 @@ export default function Home() {
                 >
                   <Link 
                     href="/login" 
-                    className="inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium border border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all"
+                    className="inline-flex items-center justify-center px-8 py-4 rounded-lg font-medium border-2 border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all text-lg"
                   >
                     Sign In
                   </Link>
@@ -171,7 +126,7 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.9, rotateY: -10 }}
               animate={{ opacity: 1, scale: 1, rotateY: 0 }}
               transition={{ duration: 1, delay: 0.3, type: "spring" }}
-              className="relative lg:h-[500px] flex justify-center"
+              className="relative lg:h-[600px] flex justify-center"
             >
               <motion.div 
                 animate={{ 
@@ -223,7 +178,7 @@ export default function Home() {
                   whileHover={{ scale: 1.03, rotate: 1 }}
                   className="relative"
                 >
-        <Image
+                  <Image
                     src="/resume-mockup.png"
                     alt="Resume Mockup"
                     width={500}
@@ -238,60 +193,31 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="py-24 bg-white dark:bg-gray-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-3xl font-bold mb-4 dark:text-white"
-            >
-              Why Choose Our Resume Builder?
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
-            >
-              <span className="font-semibold text-blue-600 dark:text-blue-400">Already trusted by 10,000+ job seekers</span> who went from frustration to interviews in record time using our advanced AI technology and expert resume insights.
-            </motion.p>
-          </div>
-
+      <section className="py-20 bg-gray-50 dark:bg-gray-900">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold mb-4">Why Choose ResumeAI?</h2>
+            <p className="text-xl text-gray-600 dark:text-gray-400">Trusted by over 10,000 job seekers worldwide</p>
+          </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
               <motion.div
-                key={index}
+                key={feature.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ 
-                  scale: 1.05, 
-                  boxShadow: "0 15px 30px -10px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
-                  y: -5 
-                }}
-                animate={{ 
-                  scale: activeFeature === index ? 1.05 : 1,
-                  boxShadow: activeFeature === index ? "0 15px 30px -10px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)" : "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
-                  y: activeFeature === index ? -5 : 0
-                }}
-                className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md transition-all duration-300 border border-gray-100 dark:border-gray-700"
+                viewport={{ once: true }}
+                className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow"
               >
-                <motion.div 
-                  animate={{ 
-                    scale: activeFeature === index ? [1, 1.2, 1] : 1,
-                  }}
-                  transition={{ duration: 0.5 }}
-                  className="mb-4 text-blue-600 dark:text-blue-400"
-                >
-                  {feature.icon}
-                </motion.div>
-                <h3 className="text-xl font-semibold mb-2 dark:text-white">{feature.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300">{feature.description}</p>
+                <div className="mb-4">{feature.icon}</div>
+                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -301,7 +227,7 @@ export default function Home() {
       {/* How It Works Section */}
       <section className="py-24 bg-gray-50 dark:bg-gray-950">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -428,146 +354,111 @@ export default function Home() {
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+        <div className="container mx-auto px-4 text-center">
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center max-w-3xl mx-auto"
+            className="max-w-3xl mx-auto"
           >
-            <motion.h2 
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-3xl font-bold mb-6"
-            >
-              Stop Getting Rejected by ATS Systems!
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-xl mb-8"
-            >
-              <span className="font-bold">75% of resumes never reach human eyes.</span> Don't be part of that statistic! Join thousands who've transformed their job search with ResumeAI—many landing interviews within 48 hours of applying.
-            </motion.p>
+            <h2 className="text-4xl font-bold mb-6">Stop Getting Rejected by ATS Systems!</h2>
+            <div className="bg-white/10 rounded-xl p-6 mb-8 backdrop-blur-sm">
+              <h3 className="text-2xl font-semibold mb-4">Did You Know?</h3>
+              <div className="grid md:grid-cols-3 gap-6 text-left">
+                <div className="flex items-start space-x-2">
+                  <XCircle className="h-6 w-6 text-red-400 flex-shrink-0 mt-1" />
+                  <p className="text-lg"><span className="font-bold text-red-200">75%</span> of resumes are rejected by ATS before reaching human eyes</p>
+                </div>
+                <div className="flex items-start space-x-2">
+                  <XCircle className="h-6 w-6 text-red-400 flex-shrink-0 mt-1" />
+                  <p className="text-lg"><span className="font-bold text-red-200">98%</span> of Fortune 500 companies use ATS to filter candidates</p>
+                </div>
+                <div className="flex items-start space-x-2">
+                  <XCircle className="h-6 w-6 text-red-400 flex-shrink-0 mt-1" />
+                  <p className="text-lg"><span className="font-bold text-red-200">43%</span> of resumes are discarded due to incorrect formatting</p>
+                </div>
+              </div>
+            </div>
+            <p className="text-xl mb-8 font-medium">
+              Don't let your dream job slip away because of an outdated resume format. 
+              Our AI-powered platform ensures your resume beats ATS systems and gets seen by hiring managers.
+              <span className="block mt-4 text-yellow-200">
+                Join thousands who've landed interviews within 48 hours of using ResumeAI!
+              </span>
+            </p>
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              whileHover={{ scale: 1.05, boxShadow: "0 15px 30px -5px rgba(0, 0, 0, 0.3)" }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="inline-block"
             >
               <Link 
                 href="/signup" 
-                className="inline-flex items-center justify-center px-8 py-4 rounded-lg font-medium bg-white text-blue-600 shadow-lg hover:shadow-xl transition-all"
+                className="inline-flex items-center justify-center px-8 py-4 rounded-lg font-medium bg-white text-blue-600 hover:bg-blue-50 transition-all text-lg shadow-lg hover:shadow-xl"
               >
-                Start Your Success Story Now
-                <ChevronRight className="ml-2 h-5 w-5" />
+                Transform Your Resume Now
+                <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </motion.div>
+            <p className="mt-6 text-sm text-white/80">
+              Join over 10,000+ successful job seekers who've already transformed their careers
+            </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-900">
+      {/* Testimonials Section */}
+      <section className="py-20 bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <h2 className="text-3xl font-bold mb-4 dark:text-white">Success Stories</h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Join thousands of job seekers who've transformed their careers with our platform.
-            </p>
+            <h2 className="text-4xl font-bold mb-4">Success Stories</h2>
+            <p className="text-xl text-gray-600 dark:text-gray-400">See what our users are saying</p>
           </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
-                name: "Michael Torres",
-                position: "Software Engineer",
-                company: "Tech Solutions Inc.",
-                image: "/testimonial1.jpg",
-                text: "After 2 months of job searching with no luck, I used this platform to optimize my resume. Within 2 weeks, I had 5 interview requests from top companies. I just accepted an offer with a 35% salary increase!"
+                quote: "ResumeAI helped me land my dream job at a top tech company. The AI analysis was spot-on!",
+                author: "Sarah J.",
+                role: "Software Engineer"
               },
               {
-                name: "Sarah Johnson",
-                position: "Marketing Director",
-                company: "Creative Agency",
-                image: "/testimonial2.jpg",
-                text: "My resume was stuck in ATS limbo for months. After using the AI analysis and following the recommendations, I landed 3 interviews in one week! This tool is a game-changer for serious job seekers."
+                quote: "I was struggling with ATS systems until I found ResumeAI. Now I get callbacks for almost every application!",
+                author: "Michael R.",
+                role: "Marketing Manager"
               },
               {
-                name: "David Chen",
-                position: "Financial Analyst",
-                company: "Global Investments",
-                image: "/testimonial3.jpg",
-                text: "The job match feature helped me discover opportunities I wouldn't have found otherwise. My optimized resume matched 93% with my dream job posting, and I got called for an interview the next day!"
+                quote: "The AI-powered suggestions made my resume stand out. I received 3 job offers in just 2 weeks!",
+                author: "Emily T.",
+                role: "Product Manager"
               }
             ].map((testimonial, index) => (
               <motion.div
-                key={index}
+                key={testimonial.author}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ 
-                  y: -5,
-                  boxShadow: "0 15px 30px -10px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
-                  borderColor: "rgba(209, 213, 219, 1)"
-                }}
-                className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md flex flex-col h-full relative border border-gray-100 dark:border-gray-700"
+                viewport={{ once: true }}
+                className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg"
               >
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-gray-200 dark:bg-gray-700 rounded-full mr-3 flex-shrink-0 overflow-hidden">
-                    {testimonial.image && (
-          <Image
-                        src={testimonial.image}
-                        alt={testimonial.name}
-                        width={48}
-                        height={48}
-                        className="object-cover"
-                      />
-                    )}
-                  </div>
-                  <div>
-                    <h3 className="font-semibold dark:text-white">{testimonial.name}</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      {testimonial.position} at {testimonial.company}
-                    </p>
-                  </div>
-                </div>
-                <p className="text-gray-600 dark:text-gray-300 flex-grow">{testimonial.text}</p>
-                <div className="mt-4 text-yellow-500 flex">
+                <div className="flex mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} fill="currentColor" size={18} />
+                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
                   ))}
+                </div>
+                <p className="text-gray-600 dark:text-gray-400 mb-4">{testimonial.quote}</p>
+                <div>
+                  <p className="font-semibold">{testimonial.author}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">{testimonial.role}</p>
                 </div>
               </motion.div>
             ))}
           </div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center mt-12"
-          >
-            <Link href="/signup" className="inline-block bg-blue-600 hover:bg-blue-700 text-white py-3 px-8 rounded-lg font-medium text-lg transition-colors duration-300">
-              Join Our Success Stories
-            </Link>
-          </motion.div>
         </div>
       </section>
 
@@ -594,10 +485,10 @@ export default function Home() {
             >
               <h4 className="text-lg font-semibold mb-4">Features</h4>
               <ul className="space-y-2">
-                <li><span className="text-gray-400 hover:text-white transition-colors">Resume Analysis</span></li>
-                <li><span className="text-gray-400 hover:text-white transition-colors">Resume Builder</span></li>
-                <li><span className="text-gray-400 hover:text-white transition-colors">Resume Templates</span></li>
-                <li><span className="text-gray-400 hover:text-white transition-colors">ATS Scoring</span></li>
+                <li><span className="text-gray-400 hover:text-white transition-colors cursor-pointer">Resume Analysis</span></li>
+                <li><span className="text-gray-400 hover:text-white transition-colors cursor-pointer">Resume Builder</span></li>
+                <li><span className="text-gray-400 hover:text-white transition-colors cursor-pointer">Resume Templates</span></li>
+                <li><span className="text-gray-400 hover:text-white transition-colors cursor-pointer">ATS Scoring</span></li>
               </ul>
             </motion.div>
             <motion.div
@@ -608,9 +499,9 @@ export default function Home() {
             >
               <h4 className="text-lg font-semibold mb-4">Resources</h4>
               <ul className="space-y-2">
-                <li><span className="text-gray-400 hover:text-white transition-colors">Blog</span></li>
-                <li><span className="text-gray-400 hover:text-white transition-colors">Support</span></li>
-                <li><span className="text-gray-400 hover:text-white transition-colors">FAQ</span></li>
+                <li><span className="text-gray-400 hover:text-white transition-colors cursor-pointer">Blog</span></li>
+                <li><span className="text-gray-400 hover:text-white transition-colors cursor-pointer">Support</span></li>
+                <li><span className="text-gray-400 hover:text-white transition-colors cursor-pointer">FAQ</span></li>
               </ul>
             </motion.div>
             <motion.div
@@ -621,9 +512,9 @@ export default function Home() {
             >
               <h4 className="text-lg font-semibold mb-4">Connect</h4>
               <ul className="space-y-2">
-                <li><span className="text-gray-400 hover:text-white transition-colors">Contact Us</span></li>
-                <li><span className="text-gray-400 hover:text-white transition-colors">Twitter</span></li>
-                <li><span className="text-gray-400 hover:text-white transition-colors">LinkedIn</span></li>
+                <li><span className="text-gray-400 hover:text-white transition-colors cursor-pointer">Contact Us</span></li>
+                <li><span className="text-gray-400 hover:text-white transition-colors cursor-pointer">Twitter</span></li>
+                <li><span className="text-gray-400 hover:text-white transition-colors cursor-pointer">LinkedIn</span></li>
               </ul>
             </motion.div>
           </div>

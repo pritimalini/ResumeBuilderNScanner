@@ -18,8 +18,26 @@ const app = express();
 // Connect to database
 connectDB();
 
+// CORS options
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Get allowed origins from environment variable
+    const allowedOrigins = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : ['http://localhost:3000'];
+    const isDevelopment = process.env.NODE_ENV === 'development';
+    
+    // In development, or if request has no origin (like mobile apps), allow
+    if (isDevelopment || !origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
