@@ -1,5 +1,5 @@
 import axios from 'axios';
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import supabase from '../config/supabase';
 import OpenAI from 'openai';
 
@@ -7,6 +7,21 @@ import OpenAI from 'openai';
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
+
+// Define job type
+interface Job {
+  title: string;
+  company: string;
+  location: string;
+  source: string;
+  url: string;
+  external_id: string | null;
+  description?: string;
+  requirements?: string;
+  job_type?: string;
+  salary_range?: string;
+  skills?: string[];
+}
 
 // Job sources
 const jobSources = [
@@ -16,7 +31,7 @@ const jobSources = [
 ];
 
 // Function to scrape jobs from a given URL
-async function scrapeJobs(source: { name: string, url: string }, query: string) {
+async function scrapeJobs(source: { name: string, url: string }, query: string): Promise<Job[]> {
   try {
     // In a real implementation, you would handle pagination, rate limiting, etc.
     // This is a simplified version for demonstration purposes
@@ -28,7 +43,7 @@ async function scrapeJobs(source: { name: string, url: string }, query: string) 
     const response = await axios.get(url);
     const $ = cheerio.load(response.data);
     
-    const jobs = [];
+    const jobs: Job[] = [];
     
     // The actual selectors would depend on the website structure
     // These are just examples
@@ -148,7 +163,7 @@ async function extractJobDetails(jobUrl: string) {
 }
 
 // Function to store jobs in the database
-async function storeJobs(jobs: any[]) {
+async function storeJobs(jobs: Job[]) {
   for (const job of jobs) {
     try {
       // Check if job already exists
@@ -191,7 +206,7 @@ async function storeJobs(jobs: any[]) {
 export async function findJobs(query: string) {
   console.log(`Finding jobs for query: ${query}`);
   
-  const allJobs = [];
+  const allJobs: Job[] = [];
   
   // For each source, scrape jobs
   for (const source of jobSources) {
