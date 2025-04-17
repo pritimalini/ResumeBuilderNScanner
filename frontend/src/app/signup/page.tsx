@@ -104,11 +104,7 @@ export default function SignupPage() {
     setErrors({ ...errors, form: '' });
     
     try {
-      await register({
-        name: formData.name,
-        email: formData.email,
-        password: formData.password
-      });
+      await register(formData.name, formData.email, formData.password);
       
       router.push('/dashboard');
     } catch (error: any) {

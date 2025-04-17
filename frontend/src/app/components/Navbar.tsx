@@ -72,7 +72,7 @@ const Navbar = () => {
       className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled 
           ? 'bg-white dark:bg-gray-900 shadow-md py-2' 
-          : 'bg-transparent dark:bg-transparent py-4'
+          : 'bg-white dark:bg-gray-900 py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -100,7 +100,7 @@ const Navbar = () => {
                 >
                   <Link 
                     href={link.href}
-                    className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                    className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -113,13 +113,13 @@ const Navbar = () => {
               
               {isLoggedIn ? (
                 <div className="ml-8 flex space-x-3">
-                  <Link href="/profile" className="flex items-center px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                  <Link href="/profile" className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
                     <User className="h-4 w-4 mr-1" />
                     Profile
                   </Link>
                   <button 
                     onClick={handleLogout} 
-                    className="flex items-center px-4 py-2 rounded-md text-sm font-medium border border-red-500 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                    className="flex items-center px-4 py-2 rounded-md text-sm font-medium border border-red-500 text-red-500 dark:text-red-400 dark:border-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
                   >
                     <LogOut className="h-4 w-4 mr-1" />
                     Logout
@@ -175,7 +175,7 @@ const Navbar = () => {
             <Link 
               key={link.name}
               href={link.href}
-              className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
               onClick={() => setIsOpen(false)}
             >
               {link.name}
@@ -186,7 +186,7 @@ const Navbar = () => {
             <>
               <Link 
                 href="/profile"
-                className="flex items-center px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 <User className="h-4 w-4 mr-2" />
@@ -197,7 +197,7 @@ const Navbar = () => {
                   handleLogout();
                   setIsOpen(false);
                 }}
-                className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-red-500 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
               >
                 <div className="flex items-center">
                   <LogOut className="h-4 w-4 mr-2" />
@@ -209,7 +209,7 @@ const Navbar = () => {
             <>
               <Link 
                 href="/login"
-                className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 Login

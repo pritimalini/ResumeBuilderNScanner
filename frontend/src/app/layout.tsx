@@ -5,7 +5,6 @@ import { Inter } from 'next/font/google';
 import Navbar from './components/Navbar';
 import { usePathname } from 'next/navigation';
 import { AuthProvider } from '../context/AuthContext';
-import { useState, useEffect } from 'react';
 import { ThemeProvider } from 'next-themes';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -20,22 +19,22 @@ export default function RootLayout({
   
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased dark:bg-gray-950 dark:text-white`}>
-        <AuthProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-            storageKey="resume-ai-theme"
-          >
+      <body className={`${inter.className} antialiased bg-white dark:bg-gray-950 text-gray-900 dark:text-white transition-colors duration-200`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+          storageKey="resume-ai-theme"
+        >
+          <AuthProvider>
             {/* Always render the Navbar but conditionally apply styles */}
             {showNavbar ? <Navbar /> : null}
             <main className={`min-h-screen ${showNavbar ? 'pt-16' : ''}`}>
               {children}
             </main>
-          </ThemeProvider>
-        </AuthProvider>
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

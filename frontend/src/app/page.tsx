@@ -102,7 +102,7 @@ export default function Home() {
       </motion.div>
 
       {/* Hero Section */}
-      <section className="relative min-h-[100vh] flex items-center pt-20">
+      <section className="relative min-h-[100vh] flex items-center pt-20 bg-white dark:bg-gray-950 text-gray-900 dark:text-white">
         <motion.div 
           style={{ opacity, scale }}
           className="absolute inset-0 -z-10 bg-gradient-to-b from-blue-50 to-white dark:from-blue-950/30 dark:to-gray-950"
@@ -118,7 +118,7 @@ export default function Home() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, delay: 0.2 }}
-                className="text-5xl font-extrabold leading-tight mb-6"
+                className="text-5xl font-extrabold leading-tight mb-6 text-gray-900 dark:text-white"
               >
                 <motion.span 
                   initial={{ backgroundPosition: "200% 0%" }}
@@ -133,7 +133,7 @@ export default function Home() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.8 }}
-                  className="dark:text-white"
+                  className="text-gray-900 dark:text-white"
                 >
                   That Land Interviews
                 </motion.span>
@@ -233,7 +233,7 @@ export default function Home() {
                   whileHover={{ scale: 1.03, rotate: 1 }}
                   className="relative"
                 >
-                  <Image
+        <Image
                     src="/resume-mockup.png"
                     alt="Resume Mockup"
                     width={500}
@@ -541,7 +541,7 @@ export default function Home() {
                 <div className="flex items-center mb-4">
                   <div className="w-12 h-12 bg-gray-200 dark:bg-gray-700 rounded-full mr-3 flex-shrink-0 overflow-hidden">
                     {testimonial.image && (
-                      <Image
+          <Image
                         src={testimonial.image}
                         alt={testimonial.name}
                         width={48}
